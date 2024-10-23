@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Bank Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; }
+        .question { margin-bottom: 20px; }
+        .result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Test Bank Quiz</h1>
+    <form id="quizForm">
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1) Which of the following is NOT a function of a hormone?</p>
+            <label><input type="radio" name="q1" value="a"> Regulates chemical composition and volume</label><br>
+            <label><input type="radio" name="q1" value="b"> Regulates metabolism</label><br>
+            <label><input type="radio" name="q1" value="c"> Regulates glandular secretions</label><br>
+            <label><input type="radio" name="q1" value="d"> Produces electrolytes</label><br>
+            <label><input type="radio" name="q1" value="e"> Controls growth and development</label>
+        </div>
+
+        <!-- More questions can be added in a similar format -->
+        <!-- Example -->
+        <div class="question">
+            <p>2) When a hormone is present in excessive levels, the number of target-cell receptors may decrease. This is called:</p>
+            <label><input type="radio" name="q2" value="a"> Receptor recognition</label><br>
+            <label><input type="radio" name="q2" value="b"> Sensory adaptation</label><br>
+            <label><input type="radio" name="q2" value="c"> Paracrine regulation</label><br>
+            <label><input type="radio" name="q2" value="d"> Up-regulation</label><br>
+            <label><input type="radio" name="q2" value="e"> Down-regulation</label>
+        </div>
+
+        <!-- Add more questions here -->
+        
+        <input type="submit" value="Submit Test">
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('quizForm').onsubmit = function(event) {
+            event.preventDefault();  // Prevent form submission
+            
+            let score = 0;
+            let correctAnswers = {
+                q1: "d",
+                q2: "e"
+                // Add correct answers for additional questions here
+            };
+
+            // Evaluate the form inputs
+            let form = new FormData(this);
+            for (let question in correctAnswers) {
+                if (form.get(question) === correctAnswers[question]) {
+                    score++;
+                }
+            }
+
+            // Show the results
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `You scored ${score} out of ${totalQuestions}.`;
+
+            // Display correct answers
+            resultDiv.innerHTML += '<br><br>Correct Answers:<br>';
+            for (let question in correctAnswers) {
+                resultDiv.innerHTML += `${question}: ${correctAnswers[question]}<br>`;
+            }
+        }
+    </script>
+</body>
+</html>
